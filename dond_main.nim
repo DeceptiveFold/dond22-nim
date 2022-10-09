@@ -39,8 +39,41 @@ proc pre_game_init()=
 
     echo box_table
 
+##proc count_avail_box()=
+    ##for b in box_table:
+      ##echo "b"
+
+proc round_one()=
+    echo "Welcome to the the first round"
+    three_sec_sleep()
+    clear_cons()
+    #count_avail_box()
+
+
+proc play_game()= 
+    echo "Welcome to deal or no deal"
+    three_sec_sleep()
+    clear_cons()
+    echo "Please pick a box between 1 and 22"
+    echo ""
+    let play_box = parseInt(readLine(stdin))
+    case play_box
+    of 1..22:
+      clear_cons()
+      echo "Your box is number "& $play_box
+      three_sec_sleep()
+      clear_cons()
+      
+    else:
+      clear_cons()
+      echo "Your box selection is invalid, please try again"
+      three_sec_sleep()
+      play_game()
+      
+
 
 proc game_menu()=
+    pre_game_init()
     echo "in menus"
     clear_cons()
     #start
@@ -63,6 +96,7 @@ proc game_menu()=
         of "1":
             clear_cons()
             echo "start game"
+            play_game()
         of "2":
             clear_cons()
             echo "leaderboard"
@@ -84,13 +118,8 @@ game_menu()
     
 let quit_selec = readLine(stdin)
 
-proc play_game()= 
-    echo "Welcome to deal or no deal"
-    three_sec_sleep()
-    clear_cons()
-    echo "Please pick a box between 1 and 22"
-    echo ""
-    let play_box = parseInt(readLine(stdin))
+
+      
     
     
     
