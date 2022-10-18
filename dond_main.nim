@@ -6,8 +6,15 @@ import std/tables
 import std/osproc
 
 
+
+
+  
 proc clear_cons()=
+  case system.hostOS
+  of "windows":
     discard os.execShellCmd("cls")
+  of "linux":
+    discard os.execShellCmd("clear")
     
 proc three_sec_sleep()=
     os.sleep(3000)
