@@ -5,8 +5,8 @@ import std/os
 import std/tables
 import std/osproc
 
-
-
+var in_play_boxes : seq[int]
+var play_box_num : int
 
   
 proc clear_cons()=
@@ -19,43 +19,47 @@ proc clear_cons()=
 proc three_sec_sleep()=
     os.sleep(3000)
 
-proc pre_game_init()=
-    echo "this works!"
+#proc pre_game_init()=
+echo "this works!"
 
-    var money_prize = @[0.01,0.10,0.50,1.00,5.00,10.00,50.00,100.00,250.00,500.00,750.00,1000.00,3000.00,5000.00,10000.00,15000.00,20000.00,35000.00,50000.00,75000.00,100000.00,250000.00]
-    var boxes : seq[int] = @[]
+var money_prize = @[0.01,0.10,0.50,1.00,5.00,10.00,50.00,100.00,250.00,500.00,750.00,1000.00,3000.00,5000.00,10000.00,15000.00,20000.00,35000.00,50000.00,75000.00,100000.00,250000.00]
+var boxes : seq[int] = @[]
 
-    var box_table = initTable[int, float64]()
+var box_table = initTable[int, float64]()
 
 
-    for z in countup(0,21):
-        #allocating prize money to random boxes.
-        randomize()
+for z in countup(1,22):
+  #allocating prize money to random boxes.
+  randomize()
 
-        #echo money_prize.len()
-        var random_index = rand(money_prize.len()-1)
-        #box_table[z] = money_prize[random_index]
-        var money_sum = money_prize[random_index]
+  #echo money_prize.len()
+  var random_index = rand(money_prize.len()-1)
+  #box_table[z] = money_prize[random_index]
+  var money_sum = money_prize[random_index]
 
-        #echo type(z)
-        #echo type(money_sum)
+  #echo type(z)
+  #echo type(money_sum)
     
-        box_table[z] = money_sum
-        money_prize.del(random_index)
+  box_table[z] = money_sum
+  money_prize.del(random_index)
 
 
-    echo box_table
+  echo box_table
 
-##proc count_avail_box()=
-    ##for b in box_table:
-      ##echo "b"
+proc count_avail_box()=
+  for k in keys(box_table):
+    if k == play_box_num : continue 
+    in_play_boxes.add(k)
+  
+  echo in_play_boxes
+  #echo box_table 
 
 proc round_one()=
     echo "Welcome to the the first round"
     three_sec_sleep()
     clear_cons()
-    #count_avail_box()
-
+    count_avail_box()
+    
 
 proc play_game()= 
     echo "Welcome to deal or no deal"
@@ -68,8 +72,10 @@ proc play_game()=
     of 1..22:
       clear_cons()
       echo "Your box is number "& $play_box
+      play_box_num = play_box
       three_sec_sleep()
       clear_cons()
+      round_one()
       
     else:
       clear_cons()
@@ -80,7 +86,7 @@ proc play_game()=
 
 
 proc game_menu()=
-    pre_game_init()
+    #pre_game_init()
     echo "in menus"
     clear_cons()
     #start
