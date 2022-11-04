@@ -7,6 +7,7 @@ import std/osproc
 
 var in_play_boxes : seq[int]
 var play_box_num : int
+var player_box_prize : int
 
   
 proc clear_cons()=
@@ -18,6 +19,9 @@ proc clear_cons()=
     
 proc three_sec_sleep()=
     os.sleep(3000)
+
+proc two_sec_sleep()=
+    os.sleep(2000)
 
 #proc pre_game_init()=
 echo "this works!"
@@ -54,14 +58,62 @@ proc count_avail_box()=
   echo in_play_boxes
   #echo box_table 
 
+proc input_and_verify():int=
+  var f_test = 0
+  
+  let box_selec = parseInt(readLine(stdin))
+  case box_selec
+  of 1..22:
+    for i in keys(box_table):
+      if i == box_selec:
+        f_test = f_test+1
+
+  else:
+    echo "invalid box selection, please try again"
+    var retry = input_and_verify()
+
+  #echo "reached this point"
+  if f_test == 1:
+    return box_selec
+
+
+proc check_and_result(selec_box : int)=
+  var box_result : float64
+  var test = 0
+  #echo selec_box
+  for i in keys(box_table):
+    #echo i
+    if i == selec_box:
+      test = test+1
+  #echo test
+
+  if test == 1:
+    box_result = box_table[selec_box]
+    clear_cons()
+    two_sec_sleep()
+    echo "The box you selected had £"& $box_result
+    box_table.del(selec_box)
+    #return box_result
+    
+    
+
 proc round_one()=
     echo "Welcome to the the first round"
     three_sec_sleep()
     clear_cons()
+    echo "These are your available boxes"
+    echo ""
     count_avail_box()
+    echo ""
+    echo "Please enter the box number you would like to pick"
+    echo ""
+    #echo "got to this point"
+    var valid_return = input_and_verify()
+    check_and_result(valid_return)
     
 
-proc play_game()= 
+proc pre_round_one()= 
+
     echo "Welcome to deal or no deal"
     three_sec_sleep()
     clear_cons()
@@ -81,7 +133,7 @@ proc play_game()=
       clear_cons()
       echo "Your box selection is invalid, please try again"
       three_sec_sleep()
-      play_game()
+      pre_round_one()
       
 
 
@@ -109,7 +161,7 @@ proc game_menu()=
         of "1":
             clear_cons()
             echo "start game"
-            play_game()
+            pre_round_one()
         of "2":
             clear_cons()
             echo "leaderboard"
@@ -128,7 +180,9 @@ proc game_menu()=
         echo "Random ass error"
     
 game_menu()
-    
+
+
+
 let quit_selec = readLine(stdin)
 
 

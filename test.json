@@ -1,0 +1,21 @@
+{
+"outputFile": "/home/runner/EqualMassiveSorting/test",
+"compile":[
+["/home/runner/EqualMassiveSorting/stdlib_assertions.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/stdlib_assertions.nim.c.o /home/runner/EqualMassiveSorting/stdlib_assertions.nim.c"],
+["/home/runner/EqualMassiveSorting/stdlib_io.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/stdlib_io.nim.c.o /home/runner/EqualMassiveSorting/stdlib_io.nim.c"],
+["/home/runner/EqualMassiveSorting/stdlib_system.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/stdlib_system.nim.c.o /home/runner/EqualMassiveSorting/stdlib_system.nim.c"],
+["/home/runner/EqualMassiveSorting/stdlib_times.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/stdlib_times.nim.c.o /home/runner/EqualMassiveSorting/stdlib_times.nim.c"],
+["/home/runner/EqualMassiveSorting/stdlib_random.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/stdlib_random.nim.c.o /home/runner/EqualMassiveSorting/stdlib_random.nim.c"],
+["/home/runner/EqualMassiveSorting/@mtest.nim.c", "gcc -c  -w -fmax-errors=3   -I/nix/store/ap7nr6hb3q9zhphcy2s2bmxvvvg1yzcq-nim-unwrapped-1.4.8/nim/lib -I/home/runner/EqualMassiveSorting -o /home/runner/EqualMassiveSorting/@mtest.nim.c.o /home/runner/EqualMassiveSorting/@mtest.nim.c"]],
+"link":[
+"/home/runner/EqualMassiveSorting/stdlib_assertions.nim.c.o",
+"/home/runner/EqualMassiveSorting/stdlib_io.nim.c.o",
+"/home/runner/EqualMassiveSorting/stdlib_system.nim.c.o",
+"/home/runner/EqualMassiveSorting/stdlib_times.nim.c.o",
+"/home/runner/EqualMassiveSorting/stdlib_random.nim.c.o",
+"/home/runner/EqualMassiveSorting/@mtest.nim.c.o"
+],
+"linkcmd": "gcc   -o /home/runner/EqualMassiveSorting/test  /home/runner/EqualMassiveSorting/stdlib_assertions.nim.c.o /home/runner/EqualMassiveSorting/stdlib_io.nim.c.o /home/runner/EqualMassiveSorting/stdlib_system.nim.c.o /home/runner/EqualMassiveSorting/stdlib_times.nim.c.o /home/runner/EqualMassiveSorting/stdlib_random.nim.c.o /home/runner/EqualMassiveSorting/@mtest.nim.c.o  -lm -lrt   -ldl",
+"extraCmds": [],
+"stdinInput": false
+}
