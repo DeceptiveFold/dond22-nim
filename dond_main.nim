@@ -27,6 +27,9 @@ proc two_sec_sleep()=
 echo "this works!"
 
 var money_prize = @[0.01,0.10,0.50,1.00,5.00,10.00,50.00,100.00,250.00,500.00,750.00,1000.00,3000.00,5000.00,10000.00,15000.00,20000.00,35000.00,50000.00,75000.00,100000.00,250000.00]
+
+var erad_mon_priz : seq[float64] = @[]
+
 var boxes : seq[int] = @[]
 
 var box_table = initTable[int, float64]()
@@ -94,7 +97,22 @@ proc check_and_result(selec_box : int)=
     echo "The box you selected had £"& $box_result
     box_table.del(selec_box)
     #return box_result
-    
+
+
+proc disp_money_board(mon_inp : float64)=
+  var space_gap : string
+  var comp_mon_priz =       @[0.01,0.10,0.50,1.00,5.00,10.00,50.00,100.00,250.00,500.00,750.00,1000.00,3000.00,5000.00,10000.00,15000.00,20000.00,35000.00,50000.00,75000.00,100000.00,250000.00]
+  echo "in disp money board"
+  for i in countup(0,10):
+    if comp_mon_priz[i] == 0.01:
+      space_gap = "         "
+    if comp_mon_priz[i] == 0.1 or comp_mon_priz[i] == 0.5 or comp_mon_priz[i] == 1.0 or comp_mon_priz[i] == 5.0:
+      space_gap = "          "
+    if comp_mon_priz[i] == 10.0 or comp_mon_priz[i] == 50.0:
+      space_gap = "         "
+    if comp_mon_priz[i] == 100.0 or comp_mon_priz[i] == 250.0 or comp_mon_priz[i] == 500.0 or comp_mon_priz[i] == 750.0:
+      space_gap = "        "
+    echo $comp_mon_priz[i]&space_gap& $comp_mon_priz[i+11]
     
 
 proc round_one()=
@@ -151,6 +169,7 @@ proc game_menu()=
     echo "Type 2 to view the leaderboard"
     echo "Type 3 to view the credits"
     echo "Type 4 to quit the game"
+    echo "Type x for a debug option"
     echo ""
     
     #case statement
@@ -171,6 +190,9 @@ proc game_menu()=
         of "4":
             clear_cons()
             echo "quit"
+        of "x":
+            clear_cons()
+            disp_money_board(0.0)
         else:
             echo "your selection was invalid, please try again"
             three_sec_sleep()
