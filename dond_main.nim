@@ -16,7 +16,10 @@ proc clear_cons()=
     discard os.execShellCmd("cls")
   of "linux":
     discard os.execShellCmd("clear")
-    
+
+proc five_sec_sleep()=
+  os.sleep(5000)
+
 proc three_sec_sleep()=
     os.sleep(3000)
 
@@ -79,6 +82,14 @@ proc input_and_verify():int=
   if f_test == 1:
     return box_selec
 
+proc avail_boxes_pick()=
+    echo "These are your available boxes"
+    echo ""
+    count_avail_box()
+    echo ""
+    echo "Please enter the box number you would like to pick"
+    echo ""
+
 
 proc check_and_result(selec_box : int)=
   var box_result : float64
@@ -95,15 +106,31 @@ proc check_and_result(selec_box : int)=
     clear_cons()
     two_sec_sleep()
     echo "The box you selected had £"& $box_result
+    erad_mon_priz.add(box_result)
     box_table.del(selec_box)
     #return box_result
 
 
 proc disp_money_board(mon_inp : float64)=
   var space_gap : string
+  var blanker = ""
+  var blanker_2 = ""
   var comp_mon_priz =       @[0.01,0.10,0.50,1.00,5.00,10.00,50.00,100.00,250.00,500.00,750.00,1000.00,3000.00,5000.00,10000.00,15000.00,20000.00,35000.00,50000.00,75000.00,100000.00,250000.00]
-  echo "in disp money board"
+  #echo "in disp money board"
   for i in countup(0,10):
+
+    var print_out_1 = $comp_mon_priz[i]
+    var print_out_2 = $comp_mon_priz[i+11]
+
+    if comp_mon_priz[i] in erad_mon_priz:
+      print_out_1 = blanker
+
+    if comp_mon_priz[i+11] in erad_mon_priz:
+      print_out_2 = blanker_2
+      
+        
+    
+
     if comp_mon_priz[i] == 0.01:
       space_gap = "         "
     if comp_mon_priz[i] == 0.1 or comp_mon_priz[i] == 0.5 or comp_mon_priz[i] == 1.0 or comp_mon_priz[i] == 5.0:
@@ -112,22 +139,27 @@ proc disp_money_board(mon_inp : float64)=
       space_gap = "         "
     if comp_mon_priz[i] == 100.0 or comp_mon_priz[i] == 250.0 or comp_mon_priz[i] == 500.0 or comp_mon_priz[i] == 750.0:
       space_gap = "        "
-    echo $comp_mon_priz[i]&space_gap& $comp_mon_priz[i+11]
+    echo print_out_1&space_gap&print_out_2
     
 
 proc round_one()=
     echo "Welcome to the the first round"
     three_sec_sleep()
     clear_cons()
-    echo "These are your available boxes"
-    echo ""
-    count_avail_box()
-    echo ""
-    echo "Please enter the box number you would like to pick"
-    echo ""
+    avail_boxes_pick()
     #echo "got to this point"
     var valid_return = input_and_verify()
     check_and_result(valid_return)
+    disp_money_board(0.0)
+
+    ### next box selection
+    five_sec_sleep()
+    clear_cons()
+    avail_boxes_pick()
+    valid_return = input_and_verify()
+    check_and_result(valid_return)
+    disp_money_board(0.0)
+    
     
 
 proc pre_round_one()= 
